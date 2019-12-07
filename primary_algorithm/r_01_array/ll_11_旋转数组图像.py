@@ -12,11 +12,6 @@ def rotate(matrix):
     # matrix[:] = map(list, zip(*matrix[:: -1]))
     # return matrix
 
-    # m = matrix.copy()
-    # n = len(matrix)
-    # for i in range(n):
-    #     matrix[i] = [m[j][i] for j in range(n - 1, -1, -1)]
-    # return matrix
 
 if __name__ == '__main__':
     print(rotate([
