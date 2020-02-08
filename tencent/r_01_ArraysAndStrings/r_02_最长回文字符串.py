@@ -55,4 +55,3 @@ if __name__ == '__main__':
     # print(longestPalindrome("abacab"))
     print(longestPalindrome("babad"))
     # print(longestPalindrome("aaabaaaaaa"))
-
