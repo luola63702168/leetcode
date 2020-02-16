@@ -5,21 +5,21 @@
 
 
 def heapify(list_, n, i):
-    largest = i
+    max_ = i
     c_left = 2 * i + 1
     c_right = 2 * i + 2
-
+    # n 是用来防止越界的
     if c_left < n and list_[i] < list_[c_left]:
-        largest = c_left
+        max_ = c_left
 
-    if c_right < n and list_[largest] < list_[c_right]:
-        largest = c_right
+    if c_right < n and list_[max_] < list_[c_right]:
+        max_ = c_right
 
-    if largest != i:
-        list_[i], list_[largest] = list_[largest], list_[i]  # 交换
+    if max_ != i:
+        list_[i], list_[max_] = list_[max_], list_[i]  # 交换
         # 递归，继续对该节点的下面层做heapify(避免修改节点值之后，下面层不满足堆定义)。
-        heapify(list_, n, largest)
-    # 递归出口为 largest = i 的时候
+        heapify(list_, n, max_)
+    # 递归出口为 max_ = i 的时候
     # return
 
 
@@ -27,21 +27,20 @@ def heap_sort(list_):
     n = len(list_)
 
     # 创建一个大顶堆
-    # 循环的作用：倒着使每个节点都能做heapify
-    for i in range(n, -1, -1):
+    last_node = n - 1
+    parent = (last_node - 1) // 2
+    # 倒着从最后一个父节点开始，使每个节点都能做heapify
+    for i in range(parent, -1, -1):
         heapify(list_, n, i)
-    # heapify(list_, n, i)
     print(list_)
 
     # 一个个交换元素
     for i in range(n - 1, 0, -1):
         list_[i], list_[0] = list_[0], list_[i]  # 交换
-        heapify(list_, i, 0)  # 恢复剩下数据的堆结构
+        heapify(list_, i, 0)  # 恢复剩下数据的堆结构(i:刚好代表了剩下节点的数目；0代表：每次交换后都从第0个节点开始做heapify)
         # print("***", list_)
 
 
 list_ = [12, 1, 14, 5, 20, 31, 6, 7]
 heap_sort(list_)
 print(list_)
-
-# 堆排序原理：将根节点和顶节点交换，然后砍断根节点，并恢复剩下数据的堆结构。
