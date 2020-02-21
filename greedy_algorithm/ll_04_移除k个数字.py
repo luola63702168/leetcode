@@ -41,7 +41,7 @@ def removeKdigits(num, k):
         num_list.append(ns)
     # print(num_list)
     num = ''.join(num_list)
-    num = num[:-k] if k else num
+    num = num[:-k] if k > 0 else num
     return str(int(num))
 
 
