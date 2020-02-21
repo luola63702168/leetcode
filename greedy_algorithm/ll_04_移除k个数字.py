@@ -65,7 +65,7 @@ def removeKdigits2(num, k):
             k -= 1
         else:
             i += 1
-    num = num[:len(num) - k]  # 循环结束，k>0,当前字符串从小到大排列，则去掉最后k个数
+    num = num[:len(num) - k]  # 循环结束，说明现在是递增的，没有进入k-1的那环，则去掉最后k个数
     return str(int(num))  # int去掉前导0
 
 
