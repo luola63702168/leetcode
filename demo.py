@@ -1,62 +1,27 @@
-# -*- coding: utf-8 -*-'
-
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
-class Solution(object):
-    """
-    归并排序
-    """
-    def sortList(self, head):
-        """
-        快慢指针分割链表
-        :param head:
-        :return:
-        """
-        # 空的，或者只有一个
-        if not head or not head.next:
-            return head
-        slow, fast = head, head.next
-        # print(id(slow),id(fast),id(head))
-
-        # 快慢指针找到中间节点（slow走一步，fast走两步）
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-        mid = slow.next
-        slow.next = None  # 由于链表种存的都是地址，所以此时改变的其实是该链表中的链接关系
-        return self.merge(*map(self.sortList, [head, mid]))
-
-    def merge(self, l1, l2):
-        """
-        依次合并子链表
-        :param l1: 子链表1
-        :param l2: 子链表2
-        :return: 排序后的结果
-        """
-        dummy = tmp_l = ListNode(None)
-        while l1 and l2:
-            if l1.val < l2.val:
-                tmp_l.next, tmp_l, l1 = l1, l1, l1.next
-            else:
-                tmp_l.next, tmp_l, l2 = l2, l2, l2.next
-
-        tmp_l.next = l1 or l2  # 把剩下的还有的也拼接一下
-        return dummy.next
-
-
-if __name__ == "__main__":
-    s = Solution()
-    l_tmp = head = ListNode(None)
-    # print(id(l),id(head))
-    for val in [0, 4, 1, 6, 7]:
-        l_tmp.next = ListNode(val)
-        l_tmp = l_tmp.next
-    # print(id(l), id(head))
-    li = s.sortList(head.next)
-    while li:
-        print(li.val)
-        li = li.next
+	def xzjz(m):
+            if len(m)==0: #若已经没有内圈
+                return []
+            elif len(m)==1: #若内圈只有一行
+                return m[0]
+            else: #表明还可以递归内圈
+                a=len(m) #当前矩阵行数
+                b=len(m[0]) #当前矩阵列数
+                c1=[]
+                c2=[]
+                if b==1: #如果当前矩阵只有一列
+                    a=[]
+                    for i in m:
+                        a.append(i[0])
+                    return a #则返回这列元素的列表
+                for i in range(1,a-1): #如果有大于一列，这里取(1,a-1)
+                                       #是因为外圈两侧避免重复
+                        c1.append(m[i][b-1]) #设置外圈右侧列
+                        c2.append(m[i][0]) #设置外圈左侧列
+                next_m=[] #构建新矩阵，即去除外圈的剩余矩阵
+                for j in m[1:-1]: #行少2
+                    m1=j[1:-1] #列少2
+                    next_m.append(m1)
+                return m[0]+c1+m[a-1][::-1]+c2[::-1]+xzjz(next_m) #递归
+                #在这里我取一圈的数字，是第一行+右侧外圈[1:-1]+最后一行+左侧
+                #外圈[1:-1][::-1],左侧外圈因为是从下往上，所以取反
+        return xzjz(matrix)
