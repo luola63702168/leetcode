@@ -48,24 +48,6 @@ def findContentChildren(g, s):
     return child  # 返回被满足的孩子数
 
 
-def findContentChildren2(g, s):
-    """
-    分发饼干问题,（普通解）
-    :param g: 孩子的胃口
-    :param s: 饼干的大小
-    :return: 满足孩子的数量
-    """
-    g.sort()
-    s.sort()
-    count = 0
-    for i in s:
-        for t in g:
-            if i >= t:
-                count += 1
-                g.remove(t)
-                break
-        continue
-    return count
 
 
 if __name__ == '__main__':
