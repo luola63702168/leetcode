@@ -1,4 +1,3 @@
+import asyncio
 
-
-def aa(**kew,):
-    TemS = 1
+asyncio.Semaphore
