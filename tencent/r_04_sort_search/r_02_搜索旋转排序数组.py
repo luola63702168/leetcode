@@ -24,6 +24,7 @@ def binary_search(left, right, nums, target):
             right = mid - 1
         else:
             left = mid + 1
+        continue
     return -1
 
 
