@@ -33,4 +33,3 @@ def sort_card(nums):
 
 if __name__ == '__main__':
     sort_card([-1, -1, 3, 8, 5])
-
